@@ -31,7 +31,7 @@
 
         const getMemes = () => {
 
-          fetch(`https:meme-api.herokuapp.com/gimme/169`)
+          fetch(`https://meme-api.herokuapp.com/gimme/169`)
             .then(respone =>respone.json())
             .then(dataPayload => setMemeApiData(dataPayload))
             .catch(error => console.log(error))
