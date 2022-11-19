@@ -18,30 +18,29 @@
     <script type="text/babel">
 
       // file: src/App.js
-      const { useState } = React
+      const { useState, useEffect } = React
 
       const App = () => {
 
-        const suit = ["❤️", "♦️", "♠️", "♣️"]
-        const rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
-        const [hand, setHand] = useState([])
+        const [memes, setMemes] = useState()
+        const [memeApiData, setMemeApiData] = useState({})
 
-        const drawCard = () => {
-          let draw = `${rank[Math.floor(Math.random() * rank.length)]} ${suit[Math.floor(Math.random() * suit.length)]}` 
-          if(hand.indexOf(draw) === -1) {
-            setHand([...hand, draw])
-            console.log(hand)
-          } else if(hand.length !== 52) {
-            console.log(hand , "2")
-            drawCard()
-          } else {
-            alert("All cards have been dealt.")
-          }
+        useEffect(() => {
+          getMemes()
+        }, [])
+
+        const getMemes = () => {
+
+          fetch(`https:meme-api.herokuapp.com/gimme/169`)
+            .then(respone =>respone.json())
+            .then(dataPayload => setMemeApiData(dataPayload))
+            .catch(error => console.log(error))
         }
 
-        const shuffle = () => {
-          setHand([])
-        }
+        console.log(memeApiData)
+
+        const memesArr = memeApiData.memes
+
 
         const handStyles = {
           display: "flex",
@@ -60,20 +59,34 @@
         return (
           <>
           <div>
-          <h1>Draw a Card</h1>
-          <button onClick={drawCard}>
-            Click to Draw a Card 'test'
-          </button>
-          <button onclick={shuffle}>
-            Return Cards and Shuffle Deck
-          </button>
+          <h1>Memer</h1>
+   
           <div style={handStyles}>
-            {hand.map((card, index) => {
-              return (
-                <div style={cardStyles} key={index}>
-                  {card}
+            {memesArr?.map((meme,index) =>{
+              return(
+                <div key = {index} style={{width: "69%", padding: "18px", backgroundColor: "#ded8d1", flexWrap: "auto", borderRadius:"6.9%"}}>
+                  <div style={{backgroundColor: "#f2b740"}}>
+                    <div tag="h5" name="title" value={meme.title}>
+                      {meme.title}
+                    </div>
+                    <img alt="Img Cap"
+                        src={`${meme.url}`}
+                        width="88%"
+                        value={meme.url}
+                        style={{maxHeight: "480px",
+                                height: "88%",
+                                width: "auto" }}
+                    />
+                    <div>
+                      <div value={meme.author}>
+                        {`Created by: ${meme.author}`}
+                      </div>  
+                    </div>
+                  </div>
+                  
                 </div>
               )
+
             })}
           </div>
           </div>
