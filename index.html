@@ -45,7 +45,9 @@
         const handStyles = {
           display: "flex",
           flexDirection: "row",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
+          textAlign: "center"
+
         }
         const cardStyles = {
           border: "1px solid black",
@@ -58,14 +60,14 @@
 
         return (
           <>
-          <div>
-          <h1>Memer</h1>
+        
+          <h1>Memer is really cool</h1>
    
           <div style={handStyles}>
             {memesArr?.map((meme,index) =>{
               return(
                 <div key = {index} style={{width: "69%", padding: "18px", backgroundColor: "#ded8d1", flexWrap: "auto", borderRadius:"6.9%"}}>
-                  <div style={{backgroundColor: "#f2b740"}}>
+                  <div style={{backgroundColor: "#f2b740", borderRadius:"6.9%"}}>
                     <div tag="h5" name="title" value={meme.title}>
                       {meme.title}
                     </div>
@@ -88,7 +90,7 @@
               )
 
             })}
-          </div>
+          
           </div>
           </>
         )
