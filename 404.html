@@ -1,0 +1,109 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8" />
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Memer</title>
+  </head>
+  <body>
+    <div id="react-container"></div>
+
+    <script type="text/babel">
+
+      // file: src/App.js
+      const { useState, useEffect } = React
+
+      const App = () => {
+
+        const [memes, setMemes] = useState()
+        const [memeApiData, setMemeApiData] = useState({})
+
+        useEffect(() => {
+          getMemes()
+        }, [])
+
+        const getMemes = () => {
+
+          fetch(`https://meme-api.com/gimme/1`)
+            .then(respone =>respone.json())
+            .then(dataPayload => setMemeApiData(dataPayload))
+            .catch(error => console.log(error))
+        }
+
+        console.log(memeApiData)
+
+        const memesArr = memeApiData.memes
+
+
+        const handStyles = {
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          textAlign: "center"
+
+        }
+        const cardStyles = {
+          border: "1px solid black",
+          width: "70px",
+          height: "95px",
+          margin: "10px",
+          padding: "10px"
+        }
+        // No need to change anything ABOVE this line ^
+
+        return (
+          <>
+          <img src="Memer-logo-color.png" alt="logo" />
+          <h1>Memer is really cool</h1>
+   
+          <div style={handStyles}>
+            {memesArr?.map((meme,index) =>{
+              return(
+                <div key = {index} style={{width: "69%", padding: "18px", backgroundColor: "#ded8d1", flexWrap: "auto", borderRadius:"6.9%"}}>
+                  <div style={{backgroundColor: "#f2b740", borderRadius:"6.9%"}}>
+                    <div tag="h5" name="title" value={meme.title}>
+                      {meme.title}
+                    </div>
+                    <img alt="Img Cap"
+                        src={`${meme.url}`}
+                        width="88%"
+                        value={meme.url}
+                        style={{maxHeight: "480px",
+                                height: "88%",
+                                width: "auto" }}
+                    />
+                    <div>
+                      <div value={meme.author}>
+                        {`Created by: ${meme.author}`}
+                      </div>  
+                    </div>
+                  </div>
+                  
+                </div>
+              )
+
+            })}
+          
+          </div>
+          </>
+        )
+      }
+
+      // No need to change anything below this line
+
+      const domContainer = document.querySelector('#react-container')
+      const root = ReactDOM.createRoot(domContainer)
+      root.render(<App />)
+    </script>
+  </body>
+</html>
