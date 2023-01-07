@@ -34,7 +34,7 @@
 
         const getMemes = () => {
 
-          fetch(`https://meme-api.com/gimme/68`,{mode:'no-cors'}) // {mode:'cors',headers: {'Access-Control-Allow-Origin':'*'}}
+          fetch(`https://meme-api.com/gimme/68`) // {mode:'cors',headers: {'Access-Control-Allow-Origin':'*'}}
             .then(respone =>respone.json())
             .then(dataPayload => setMemeApiData(dataPayload))
             .catch(error => console.log(error))
