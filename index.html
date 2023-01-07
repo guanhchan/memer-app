@@ -9,7 +9,10 @@
       src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
       crossorigin
     ></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script 
+      src="https://unpkg.com/@babel/standalone/babel.min.js"
+      crossorigin
+    ></script>
     <title>Memer</title>
   </head>
   <body>
@@ -31,7 +34,7 @@
 
         const getMemes = () => {
 
-          fetch(`https://meme-api.com/gimme/28`) // {mode:'cors',headers: {'Access-Control-Allow-Origin':'*'}}
+          fetch(`https://meme-api.com/gimme/68`,{mode:'no-cors'}) // {mode:'cors',headers: {'Access-Control-Allow-Origin':'*'}}
             .then(respone =>respone.json())
             .then(dataPayload => setMemeApiData(dataPayload))
             .catch(error => console.log(error))
@@ -153,7 +156,7 @@ function downloadImage1(url, name){
             })}
           
           </div>
-          <div style={{textAlign: "center"}}><h3>Donate to Memer "To The Moon"</h3> <img style={{maxWidth: "42%", height: "auto"}} src="dogewallet_1_memer.png" alt="wallet" /></div>
+          <div><h3>Donate to Memer "To The Moon"</h3> <img style={{maxWidth: "42%", height: "auto"}} src="dogewallet_1_memer.png" alt="wallet" /></div>
           </>
         )
       }
